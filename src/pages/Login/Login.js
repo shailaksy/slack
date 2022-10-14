@@ -1,7 +1,10 @@
 import LoginFunction from "../../components/LoginFunction/LoginFunction";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+
+    let navigate = useNavigate();
 
     const signedUpUsers = JSON.parse(localStorage.getItem("signedUpUsers"));
 
@@ -23,7 +26,7 @@ function Login() {
                     password: details.password
                 })
             } else {
-                setError('Username or password does not match.')
+                setError('invalid match');
             }
         })
     }
@@ -31,7 +34,7 @@ function Login() {
     return(
         <div>
             {user.username !=='' ? (
-                console.log('insert main app')
+                navigate('/dashboard')
             ) : ( 
             <LoginFunction Login={userLoggingIn} error={error} />
         )}

@@ -5,14 +5,14 @@ import { useState } from "react";
 function SignUpForm() {
   
   let navigate = useNavigate();
-  
+
   const [newUser, setNewUser] = useState({
     email: "",
     username: "",
     password: ""
   });
 
-  const [error, setError] = useState("");
+  const [error, setError] = useState("Please fill out all fields");
 
   let users = [
     {
@@ -75,52 +75,67 @@ const signedUpUsers = JSON.parse(localStorage.getItem("signedUpUsers"));
   }
 
 return(
-  <div className='sign-up-form'>
+  <div className='signup-form'>
     <form method="GET">
-      <div className='sign-up-form-inputs'>
-        <p>{error}</p>
-        <label>Email</label>
+      <div>
+        <p className="error-message">{error}</p>
+        <div className='signup-form-inputs'>
+          <label>Email</label>
           <input 
-            className="sign-up-form-input"
+            className="signup-form-input"
             onChange={handleEmail}
             value={newUser.email}
             type="email"
             placeholder="Email"
             autoComplete="off"
             required />
+        </div>
+        <div className='signup-form-inputs'>
           <label>Username</label>
           <input 
-            className="sign-up-form-input"
+            className="signup-form-input"
             onChange={handleUsername}
             type="text"
             value={newUser.username}
             placeholder="Username"
             autoComplete="off"
             required />
+          </div>
+          <div className='signup-form-inputs'>
           <label>Password</label>
           <input 
-            className="sign-up-form-input"
+            className="signup-form-input"
             onChange={handlePassword}
             type="password"
             value={newUser.password}
             placeholder="Password" 
             autoComplete="off"
             required />
+          </div>
+          <div className='signup-form-inputs'>
+            <label>Confirm Password</label>
+            <input 
+              className="signup-form-input"
+              type="password"
+              //value={newUser.password}
+              placeholder="Password" 
+              autoComplete="off"
+              required />
+          </div>
       </div>
-      <div className='sign-up-checkbox'>
+      <div className='signup-checkbox'>
         <input
           type="checkbox"
           required />
-        <p>I agree to the terms and conditions.</p>
+        <label>I agree to the terms and conditions.</label>
       </div>
-      <div>
         <button
             type="submit"
             onClick={handleSignUp}
+            className='signup-button'
         >
         Sign Up
         </button>
-    </div>
     </form>
   </div>
 )

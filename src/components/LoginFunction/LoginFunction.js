@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import'../LoginFunction/LoginFunction.css'
 
 const LoginFunction = ( { Login, error } ) => {
     
@@ -14,12 +14,15 @@ const LoginFunction = ( { Login, error } ) => {
     }
 
     return(
-        <div>
+        <div className="login">
+            <div className="login-container">
+            <h1>Welcome back!</h1>
             <form onSubmit={handleLogin}>
-                {error !== '' ? <p>{error}</p> : ''}
-                    <div className="login-username-input"> 
+                {error !== '' ? <p className="error-message">{error}</p> : ''}
+                    <div className="login-inputs"> 
                         <label>Username</label>
                         <input
+                            className="login-input"
                             type='text'
                             name='username'
                             username='username'
@@ -31,9 +34,10 @@ const LoginFunction = ( { Login, error } ) => {
                             value={details.username}
                             placeholder='Username' />
                     </div>
-                    <div className="login-password-input">
+                    <div className="login-inputs">
                         <label>Password</label>
                         <input 
+                            className="login-input"
                             type='password'
                             name='password'
                             password='password'
@@ -46,11 +50,13 @@ const LoginFunction = ( { Login, error } ) => {
                             placeholder='Password'/>
                     </div>
                     <button 
+                        className="login-button"
                         onClick={Login}
                         type="submit">
                     Login
                     </button>
             </form>
+            </div>
         </div>
     )
 

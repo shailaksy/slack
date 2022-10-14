@@ -1,0 +1,46 @@
+.error-message {
+    padding: 0 0 1rem;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.signup-form-inputs {
+    padding: 0.5rem 0; 
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form-inputs > label {
+    margin: 0.3rem 0;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.signup-form-input {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(62, 62, 62);
+}
+
+.signup-checkbox {
+    text-align: center;
+    padding: 1rem;
+}
+
+.signup-checkbox > input {
+    margin: 0 0.5rem;
+}
+
+.signup-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0.8rem 2.5rem;
+    background-color: rgb(26, 123, 192);
+    color: white;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
