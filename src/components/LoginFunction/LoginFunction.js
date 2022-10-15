@@ -3,14 +3,36 @@ import'../LoginFunction/LoginFunction.css'
 
 const LoginFunction = ( { Login, error } ) => {
     
-    const [details, setDetails] = useState({
-        username: '',
-        password: ''
-    })
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
     const handleLogin = (e) => {
         e.preventDefault()
-        Login(details);
+        
+        //Login(details);
+        
+        const data = {
+            email: email,
+            password: password,
+          }
+      
+          fetch('http://206.189.91.54/api/v1/auth/sign_in/', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+            .then((response) => {
+              response.headers.forEach((val, key) => {
+                console.log(key + '->' + val)
+                console.log(response.status)
+              })
+              return response.json()
+            })
+            .then((result) => {
+              console.log(result)
+            })
     }
 
     return(
@@ -20,19 +42,15 @@ const LoginFunction = ( { Login, error } ) => {
             <form onSubmit={handleLogin}>
                 {error !== '' ? <p className="error-message">{error}</p> : ''}
                     <div className="login-inputs"> 
-                        <label>Username</label>
+                        <label>Email</label>
                         <input
                             className="login-input"
-                            type='text'
-                            name='username'
-                            username='username'
-                            onChange={(e) => {
-                                setDetails({
-                                    ...details,
-                                    username: e.target.value
-                                })}}
-                            value={details.username}
-                            placeholder='Username' />
+                            type='email'
+                            name='email'
+                            email='email'
+                            onChange={(e) => {setEmail(e.target.value)}}
+                            value={email}
+                            placeholder='Email' />
                     </div>
                     <div className="login-inputs">
                         <label>Password</label>
@@ -41,12 +59,8 @@ const LoginFunction = ( { Login, error } ) => {
                             type='password'
                             name='password'
                             password='password'
-                            onChange={(e) => {
-                                setDetails({
-                                    ...details,
-                                    password: e.target.value
-                                })}}
-                            value={details.password}
+                            onChange={(e) => {setPassword(e.target.value)}}
+                            value={password}
                             placeholder='Password'/>
                     </div>
                     <button 

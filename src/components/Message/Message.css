@@ -1,0 +1,12 @@
+.message-text-area {
+    position: absolute;
+    top: 80%;
+    left: 20%;
+    bottom: 5%;
+    resize: none;
+    width: 78%;
+    padding: 1rem 1.5rem;
+    border-radius: 0.8rem;
+    font-family: sans-serif;
+}
+    

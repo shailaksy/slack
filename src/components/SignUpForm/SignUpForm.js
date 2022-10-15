@@ -6,13 +6,15 @@ function SignUpForm() {
   
   let navigate = useNavigate();
 
-  const [newUser, setNewUser] = useState({
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState("Please fill out all fields");
+  
+  /*const [newUser, setNewUser] = useState({
     email: "",
     username: "",
     password: ""
   });
-
-  const [error, setError] = useState("Please fill out all fields");
 
   let users = [
     {
@@ -25,36 +27,36 @@ function SignUpForm() {
 localStorage.setItem("signedUpUsers", JSON.stringify(users));
 
 const signedUpUsers = JSON.parse(localStorage.getItem("signedUpUsers"));
-
-  const handleEmail = (e) => {
-    setNewUser({
-      ...newUser,
-      email: e.target.value
-    })
-  }
-
-  const handleUsername = (e) => {
-    setNewUser({
-      ...newUser,
-      username: e.target.value
-    })
-  }
-
-  const handlePassword = (e) => {
-    setNewUser({
-      ...newUser,
-      password: e.target.value
-    })
-  }
+*/
 
   const handleSignUp = (e) => {
     e.preventDefault();
 
-    const user = signedUpUsers.find((user) => {
-        return newUser.username === user.username;
-    })
+    const data = {
+      email: email,
+      password: password,
+      password_confirmation: password
+    }
 
-    if (user) {
+    fetch('http://206.189.91.54/api/v1/auth/', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => {
+        response.headers.forEach((val, key) => {
+          console.log(key + '->' + val)
+          console.log(response.status)
+        })
+        return response.json()
+      })
+      .then((result) => {
+        console.log(result)
+      })
+
+    /*if (user) {
         setError("Username is already taken");
         setNewUser({
             email: "",
@@ -71,33 +73,33 @@ const signedUpUsers = JSON.parse(localStorage.getItem("signedUpUsers"));
     } else {
         localStorage.setItem("signedUpUsers", JSON.stringify([...signedUpUsers, newUser]));
         navigate('/signedup');
-    }
+    }  */
   }
 
 return(
   <div className='signup-form'>
-    <form method="GET">
+    <form method="GET" onSubmit={handleSignUp}>
       <div>
-        <p className="error-message">{error}</p>
+      <p className="error-message">{error}</p>
         <div className='signup-form-inputs'>
           <label>Email</label>
           <input 
             className="signup-form-input"
-            onChange={handleEmail}
-            value={newUser.email}
+            onChange={(e) => {setEmail(e.target.value)}}
+            value={email}
             type="email"
             placeholder="Email"
             autoComplete="off"
             required />
         </div>
         <div className='signup-form-inputs'>
-          <label>Username</label>
+          <label>Password</label>
           <input 
             className="signup-form-input"
-            onChange={handleUsername}
-            type="text"
-            value={newUser.username}
-            placeholder="Username"
+            onChange={(e) => {setPassword(e.target.value)}}
+            type="password"
+            value={password}
+            placeholder="Password"
             autoComplete="off"
             required />
           </div>
@@ -105,22 +107,10 @@ return(
           <label>Password</label>
           <input 
             className="signup-form-input"
-            onChange={handlePassword}
             type="password"
-            value={newUser.password}
-            placeholder="Password" 
+            placeholder="Re-type Password" 
             autoComplete="off"
             required />
-          </div>
-          <div className='signup-form-inputs'>
-            <label>Confirm Password</label>
-            <input 
-              className="signup-form-input"
-              type="password"
-              //value={newUser.password}
-              placeholder="Password" 
-              autoComplete="off"
-              required />
           </div>
       </div>
       <div className='signup-checkbox'>
