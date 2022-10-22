@@ -1,10 +1,15 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import'../LoginFunction/LoginFunction.css'
 
-const LoginFunction = ( { Login, error } ) => {
+const LoginFunction = ( { Login } ) => {
     
+  let navigate = useNavigate();
+
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [error, setError] = useState('')
+    const [receivers, setReceivers] = useState([])
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -24,16 +29,44 @@ const LoginFunction = ( { Login, error } ) => {
             }
           })
             .then((response) => {
+
+              if (response.status === 200) {
+                navigate('/dashboard')
+                localStorage.setItem('signedInUser',data.email)
+              } else {
+                setError('Invalid match')
+              }
+
               response.headers.forEach((val, key) => {
-                console.log(key + '->' + val)
-                console.log(response.status)
+                localStorage.setItem(key,val)
               })
               return response.json()
             })
-            .then((result) => {
-              console.log(result)
-            })
     }
+
+    const fetchUsers = async () => {
+      await fetch("http://206.189.91.54/api/v1/users", {
+          method: 'GET',
+          headers: {
+              'access-token': localStorage.getItem('access-token'),
+              client: localStorage.getItem('client'),
+              expiry: localStorage.getItem('expiry'),
+              uid: localStorage.getItem('uid'),
+              'Content-Type': 'application/json'
+          }
+      })
+      .then((response) => {
+          return response.json()
+      })
+      .then((result) => {
+          setReceivers(result.data)
+      })
+  }
+
+  
+  useEffect(() => {
+     fetchUsers();
+  },[])
 
     return(
         <div className="login">

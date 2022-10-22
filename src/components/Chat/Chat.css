@@ -1,0 +1,86 @@
+.chat {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    width: 100%;
+    background-color: rgb(40, 40, 40);
+}
+
+.channel-chat-container {
+    position: fixed;
+    left: 18%;
+    background-color: rgb(40, 40, 40);
+    color: white;
+    height: 100vh;
+    width: 200vh;
+    overflow-y: hidden;
+}
+
+.select-user-container {
+    top: 7%;
+    padding-left: 3%;
+    padding-bottom: 3%;
+    position: relative;
+}
+
+.select-user {
+    margin-top: 1.5%;
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    width: 20rem;
+
+}
+
+.channel-chat-name {
+    position: absolute;
+    padding-left: 2.5rem;
+    top: 3%;
+    width: 100vw;
+}
+
+.channel-chat {
+    margin: 4rem 0 0 0;
+    padding: 1rem 3.5rem 3rem 2.5rem;
+    height: 65vh;
+    width: 140vh;
+    overflow-y: auto;
+    position: absolute;
+    left: 20%;
+}
+
+.channel-message {
+    padding: 0.8rem 0;
+}
+
+.message-text-area {
+    position: fixed;
+    top: 80%;
+    left: 20%;
+    bottom: 5%;
+    resize: none;
+    width: 78%;
+    padding: 1rem 1.5rem;
+    border-radius: 0.8rem;
+    font-family: sans-serif;
+    background-color: rgb(62, 62, 62);
+    color: white;
+}
+
+.send-message-button {
+    position: fixed;
+    top: 90%;
+    right: 3%;
+    height: 2rem;
+    width: 4rem;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9;
+    background-color: transparent;
+  }

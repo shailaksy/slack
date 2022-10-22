@@ -1,5 +1,5 @@
 .message-text-area {
-    position: absolute;
+    position: fixed;
     top: 80%;
     left: 20%;
     bottom: 5%;
@@ -8,5 +8,13 @@
     padding: 1rem 1.5rem;
     border-radius: 0.8rem;
     font-family: sans-serif;
+    background-color: rgb(62, 62, 62);;
 }
-    
+
+.send-message-button {
+    position: fixed;
+    top: 90%;
+    right: 3%;
+    height: 2rem;
+    width: 4rem;
+}

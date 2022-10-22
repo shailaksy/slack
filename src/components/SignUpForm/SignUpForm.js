@@ -46,15 +46,16 @@ const signedUpUsers = JSON.parse(localStorage.getItem("signedUpUsers"));
       }
     })
       .then((response) => {
-        response.headers.forEach((val, key) => {
-          console.log(key + '->' + val)
-          console.log(response.status)
-        })
+        if (response.status === 200) {
+          navigate('/signedup');
+        }
         return response.json()
+
       })
       .then((result) => {
         console.log(result)
       })
+      
 
     /*if (user) {
         setError("Username is already taken");
@@ -104,7 +105,7 @@ return(
             required />
           </div>
           <div className='signup-form-inputs'>
-          <label>Password</label>
+          <label>Confirm Password</label>
           <input 
             className="signup-form-input"
             type="password"

@@ -1,17 +1,98 @@
 .sidebar {
     width: 18%;
     height: 100vh;
+    top: 0;
     position: fixed;
     background-color: rgb(62, 62, 62);
     color: white;
 }
 
-.channels-container,
+.channels-container {
+    margin: 1rem;
+    padding-top: 20%;
+}
+
 .messages-container {
-    margin: 1.5rem;
+    position: absolute;
+    top: 65%;
+}
+
+.channel-container {
+    height: 20vh;
+    overflow: auto;
 }
 
 .channel-container,
 .message-container {
     margin: 0.5rem 0;
+}
+
+.indiv-channel {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    padding: 0.5rem 0; 
+}
+
+.edit-icon-view {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.update-delete-icon-view {
+    display: flex;
+    justify-content: space-between;
+}
+
+.editing-input {
+    width: 80%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+}
+
+.create-channel form {
+    display: flex;
+    justify-content: space-between;
+}
+
+.create-channel-input {
+    width: 55%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid white;
+    padding: 0.2rem 0.5rem;
+    outline: none;
+}
+
+.channel-name-link,
+.channel-name-link:active {
+    text-decoration: none;
+    color: white;
+}
+
+.channel-name-link:hover {
+    text-decoration: underline;
+}
+
+.message-user-link,
+.message-user-link:active {
+    text-decoration: none;
+    color: white;
+}
+
+.message-user-link:hover {
+    text-decoration: underline;
+}
+
+.select-channel-users {
+    height: 15vh;
+}
+
+.edit-channel-buttons {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
 }

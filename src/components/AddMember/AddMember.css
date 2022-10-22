@@ -1,0 +1,10 @@
+.add-member-modal {
+  width: 100px;
+  height: 100px;
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translate(-50%, -50%);
+  z-index: 100000000000;
+  background-color: white;
+}

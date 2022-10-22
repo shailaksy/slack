@@ -1,4 +1,9 @@
 .header {
-    display: flex;
-    justify-content: flex-end;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+}
+
+.logout-button {
+    margin: 2rem;
 }
