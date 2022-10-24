@@ -1,24 +1,19 @@
 import { useEffect, useState } from "react";
 // import Message from "../Message/Message";
 import "../Chat/Chat.css";
-import {
-  Outlet,
-  useNavigate,
-  useParams,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Conversation from "../Conversation/Conversation";
 import AddMember from "../AddMember/AddMember";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 const Chat = ({ contacts, setContacts }) => {
   const navigate = useNavigate();
+  const addMemberIcon = <FontAwesomeIcon icon={faUserPlus} />;
   const { id } = useParams();
   const [receivers, setReceivers] = useState([]);
   const [receiverId, setReceiverId] = useState("");
   const [receiverEmail, setReceiverEmail] = useState("");
-  const [chatMessages, setChatMessages] = useState([]);
-  const [messageBody, setMessageBody] = useState("");
   const [query, setQuery] = useState("");
   const [channelDetails, setChannelDetails] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -81,22 +76,26 @@ const Chat = ({ contacts, setContacts }) => {
         <div className="channel-chat-name">
           {channelDetails && <h2> {channelDetails.name} </h2>}
           {!channelDetails && <h2> {receiverEmail} </h2>}
-
-          <button
-            onClick={() => {
-              setShowModal(true);
-            }}
-          >
-            Add
-          </button>
+          {channelDetails && (
+            <button
+              className="modal-button"
+              onClick={() => {
+                setShowModal(true);
+              }}
+            >
+              {addMemberIcon}
+            </button>
+          )}
         </div>
 
-        <div className="select-user-container">
+        <div className="search-receivers-container">
           {!id && (
-            <div>
-              <label>Send to:</label>
+            <div className="search-receivers">
+              <label>Message</label>
               <input
                 type="text"
+                className="search-receivers-input"
+                placeholder="Search by email"
                 onChange={(e) => {
                   setQuery(e.target.value);
                 }}
@@ -104,14 +103,14 @@ const Chat = ({ contacts, setContacts }) => {
               />
             </div>
           )}
-
-          <ul>
+          <ul className="search-receivers-results">
             {receivers &&
               query !== "" &&
               receivers.map((receiver) => {
                 if (!receiver.email.startsWith(query)) return null;
                 return (
                   <li
+                    className="search-receivers-result"
                     onClick={() => {
                       handleSelectedReceiver(receiver);
                       setQuery("");
@@ -122,21 +121,6 @@ const Chat = ({ contacts, setContacts }) => {
                 );
               })}
           </ul>
-
-          {/* <select
-            className="select-user"
-            onChange={(e) => {
-              handleSelectedReceiver(e.target.value);
-            }}
-        > 
-            {receivers.map((receiver) => {
-              return (
-                <option key={receiver.id} value={receiver}>
-                  {receiver.email}
-                </option>
-              );
-            })}
-          </select> */}
         </div>
       </div>
 
@@ -154,7 +138,14 @@ const Chat = ({ contacts, setContacts }) => {
         />
       )}
 
-      {showModal && channelDetails && <div className="backdrop" onClick={() => {setShowModal(false)}}></div>}
+      {showModal && channelDetails && (
+        <div
+          className="backdrop"
+          onClick={() => {
+            setShowModal(false);
+          }}
+        ></div>
+      )}
     </div>
   );
 };

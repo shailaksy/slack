@@ -1,86 +1,94 @@
 .chat {
-    overflow-x: hidden;
-    overflow-y: hidden;
-    width: 100%;
-    background-color: rgb(40, 40, 40);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+  background-color: rgb(40, 40, 40);
 }
 
 .channel-chat-container {
-    position: fixed;
-    left: 18%;
-    background-color: rgb(40, 40, 40);
-    color: white;
-    height: 100vh;
-    width: 200vh;
-    overflow-y: hidden;
-}
-
-.select-user-container {
-    top: 7%;
-    padding-left: 3%;
-    padding-bottom: 3%;
-    position: relative;
-}
-
-.select-user {
-    margin-top: 1.5%;
-    margin-left: 1rem;
-    padding: 0.5rem 1rem;
-    width: 20rem;
-
+  position: fixed;
+  left: 18%;
+  background-color: rgb(40, 40, 40);
+  color: white;
+  height: 100vh;
+  width: 200vh;
+  overflow-y: hidden;
 }
 
 .channel-chat-name {
-    position: absolute;
-    padding-left: 2.5rem;
-    top: 3%;
-    width: 100vw;
+  position: absolute;
+  padding-left: 2.5rem;
+  top: 3%;
+  width: 75vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 .channel-chat {
-    margin: 4rem 0 0 0;
-    padding: 1rem 3.5rem 3rem 2.5rem;
-    height: 65vh;
-    width: 140vh;
-    overflow-y: auto;
-    position: absolute;
-    left: 20%;
+  margin: 12rem 0 0 0;
+  padding: 1rem 3.5rem 3rem 2.5rem;
+  height: 65vh;
+  overflow-y: auto;
+  left: 20%;
+  position: relative;
 }
 
 .channel-message {
-    padding: 0.8rem 0;
+  padding: 0.8rem 0;
 }
 
-.message-text-area {
-    position: fixed;
-    top: 80%;
-    left: 20%;
-    bottom: 5%;
-    resize: none;
-    width: 78%;
-    padding: 1rem 1.5rem;
-    border-radius: 0.8rem;
-    font-family: sans-serif;
-    background-color: rgb(62, 62, 62);
-    color: white;
-}
-
-.send-message-button {
-    position: fixed;
-    top: 90%;
-    right: 3%;
-    height: 2rem;
-    width: 4rem;
+.modal-button {
+  padding: 1rem;
+  font-size: 150%;
+  cursor: pointer;
+  border-radius: 2rem;
+  border: none;
 }
 
 .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 9;
-    background-color: transparent;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999999;
+  background-color: rgba(30, 30, 30, 0.92);
+}
+
+.search-receivers-container {
+  margin: 3rem;
+}
+
+.search-receivers-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 0.3rem 0;
+  outline: none;
+  color: white;
+  margin: 0 1rem;
+  width: 20%;
+}
+
+.search-receivers-results {
+  padding-left: 1rem;
+  padding-top: 0.6rem;
+  list-style-type: none;
+  height: 30vh;
+  overflow-y: scroll;
+  z-index: 9999;
+  width: 29.5vw;
+  margin-left: 4%;
+  position: relative;
+}
+
+.search-receivers-result {
+  padding: 0.5rem 0;
+  cursor: pointer;
+}
+
+.search-receivers-result:hover {
+  background-color: rgb(30, 30, 30);
+}

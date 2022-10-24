@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { faPencil, faTrash, faCheck } from "@fortawesome/free-solid-svg-icons";
-import LoginFunction from "../LoginFunction/LoginFunction";
+import { faTrash, faCheck, faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 import "../Sidebar/Sidebar.css";
-import saveContacts from "../Contacts/SaveContacts";
 
 function Sidebar({ contacts }) {
   let navigate = useNavigate();
 
-  const editIcon = <FontAwesomeIcon icon={faPencil} />;
+  const editIcon = <FontAwesomeIcon icon={faEllipsisH} />;
   const deletetIcon = <FontAwesomeIcon icon={faTrash} />;
   const updateIcon = <FontAwesomeIcon icon={faCheck} />;
   const [channelName, setChannelName] = useState("");
@@ -19,7 +15,6 @@ function Sidebar({ contacts }) {
   const [isEditing, setIsEditing] = useState(-1);
   const [editChannelName, setEditChannelName] = useState("");
   const [receivers, setReceivers] = useState([]);
-  const [channelUsers, setChannelUsers] = useState([]);
 
   const fetchChannels = () => {
     fetch("http://206.189.91.54/api/v1/channels", {
@@ -57,7 +52,7 @@ function Sidebar({ contacts }) {
     if (channelObj.name) {
       setChannelList([...channelList, channelObj]);
     }
-
+    setChannelName("");
     fetch("http://206.189.91.54/api/v1/channels", {
       method: "POST",
       body: JSON.stringify(channelObj),
@@ -123,40 +118,26 @@ function Sidebar({ contacts }) {
     fetchUsers();
   }, []);
 
-  const fake = [{ email: "A" }, { email: "B" }];
+  const openConversation = (userId) => {
+    navigate(`/dashboard/User/${userId}`);
+  };
 
   return (
     <div className="sidebar">
       <div className="channels-container">
         <h3>Channels</h3>
         <div className="channel-container">
-          <ul>
+          <ul className="channel-ul-container">
             {channelList.map((channel) => {
               return (
-                <li className="indiv-channel" key={channel.id}>
+                <li className="channel" key={channel.id}>
                   <span>
-                    {isEditing === channel.id ? (
-                      <input
-                        className="editing-input"
-                        type="text"
-                        maxLength="20"
-                        value={editChannelName}
-                        onChange={(e) => {
-                          setEditChannelName(e.target.value);
-                        }}
-                        onBlur={() => {
-                          handleUpdate(channel.id);
-                        }}
-                      />
-                    ) : (
-                      <Link
-                        to={`/dashboard/Channel/${channel.id}`}
-                        className="channel-name-link"
-                        //onChange={}
-                      >
-                        {channel.name}
-                      </Link>
-                    )}
+                    <Link
+                      to={`/dashboard/Channel/${channel.id}`}
+                      className="channel-name-link"
+                    >
+                      {channel.name}
+                    </Link>
                   </span>
                   {isEditing === channel.id ? (
                     <span className="update-delete-icon-view">
@@ -176,7 +157,6 @@ function Sidebar({ contacts }) {
                       >
                         {deletetIcon}
                       </button>
-                      <button>Add</button>
                     </span>
                   ) : (
                     <span className="edit-icon-view">
@@ -194,9 +174,7 @@ function Sidebar({ contacts }) {
               );
             })}
           </ul>
-        </div>
-
-        <div className="create-channel">
+          <div className="create-channel">
           <form onSubmit={handleAddChannel}>
             <input
               type="text"
@@ -208,37 +186,31 @@ function Sidebar({ contacts }) {
                 setChannelName(e.target.value);
               }}
             />
-
-            {/*<select multiple 
-                className='select-channel-users'
-                onChange={(e) => {setChannelUsers(e.target.value)}}>
-                
-                {receivers.map((receiver) => {
-                    return(
-                        <option key={receiver.id} value={receiver.id}>{receiver.email}</option>
-                    )
-                })}
-            </select> */}
-
             <button className="edit-channel-buttons">{updateIcon}</button>
           </form>
         </div>
-
+        </div>
         <div className="messages-container">
           <h3>Direct Messages</h3>
           <div className="message-container">
-            <ul>
+            <ul className="message-ul-container">
               {contacts.map((contact) => {
-                return <li key={contact.id}>{contact.email}</li>;
+                return (
+                  <li
+                    className="message"
+                    key={contact.id}
+                    onClick={() => {
+                      openConversation(contact.id);
+                    }}
+                  >
+                    {contact.email}
+                  </li>
+                );
               })}
             </ul>
           </div>
         </div>
       </div>
-
-
-
-
     </div>
   );
 }

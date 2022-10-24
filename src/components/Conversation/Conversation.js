@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import saveContacts from "../Contacts/SaveContacts";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 import "../Conversation/Conversation.css";
 
 const Conversation = ({ receiverEmail, contacts, setContacts }) => {
+  const navigate = useNavigate();
+  const messageIcon = <FontAwesomeIcon icon={faEdit} />;
+  const sendIcon = <FontAwesomeIcon icon={faPaperPlane} />;
   const [chatMessages, setChatMessages] = useState([]);
   const [messageBody, setMessageBody] = useState("");
   const { receiverClass, id: receiverId } = useParams();
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    setMessageBody('');
+    setMessageBody("");
     const message = {
       receiver_id: receiverId,
       receiver_class: receiverClass,
       body: messageBody,
     };
-    setChatMessages([...chatMessages, message]);
-
+    if (!message.body) {
+      setChatMessages([...chatMessages, message]);
+    }
     await fetch("http://206.189.91.54/api/v1/messages", {
       method: "POST",
       body: JSON.stringify(message),
@@ -28,19 +34,17 @@ const Conversation = ({ receiverEmail, contacts, setContacts }) => {
         uid: localStorage.getItem("uid"),
         "Content-Type": "application/json",
       },
-    })
-      .then((response) => {
-        return response.json();
-      })
+    }).then((response) => {
+      return response.json();
+    });
 
-    if (receiverClass === 'User') {saveContacts(receiverEmail, receiverId);}  
-    
+    if (receiverClass === "User") {
+      saveContacts(receiverEmail);
+    }
+
     const checker = contacts.some((contact) => contact.email === receiverEmail);
-    if (!checker && receiverClass === 'User') {
-      setContacts([
-        ...contacts,
-        { email: receiverEmail, id: receiverId },
-      ]);
+    if (!checker && receiverClass === "User") {
+      setContacts([...contacts, { email: receiverEmail, id: receiverId }]);
     }
   };
 
@@ -64,17 +68,20 @@ const Conversation = ({ receiverEmail, contacts, setContacts }) => {
       .then((result) => {
         setChatMessages(result.data);
       });
-
-    {
-      /* if (localStorage.getItem(`directMessagesTo${receiverId}`)) {
-            const dmsToReceiverId = JSON.parse(localStorage.getItem(`directMessagesTo${receiverId}`))
-            setChatMessages(dmsToReceiverId);
-        } */
-    }
   }, [receiverId]);
+
+  const newMessage = () => {
+    navigate("/dashboard/");
+    // setReceiverEmail('');
+  };
 
   return (
     <>
+      <div>
+        <button onClick={newMessage} className="new-message-icon">
+          {messageIcon}
+        </button>
+      </div>
       <div className="channel-chat">
         <ul className="message-ul">
           {chatMessages &&
@@ -87,7 +94,6 @@ const Conversation = ({ receiverEmail, contacts, setContacts }) => {
             })}
         </ul>
       </div>
-
       <div>
         <form>
           <textarea
@@ -105,7 +111,7 @@ const Conversation = ({ receiverEmail, contacts, setContacts }) => {
             type="submit"
             onClick={sendMessage}
           >
-            Send
+            {sendIcon}
           </button>
         </form>
       </div>

@@ -19,30 +19,36 @@ const AddMember = ({ channelId, channelName, userList }) => {
         uid: localStorage.getItem("uid"),
         "Content-Type": "application/json",
       },
-    })
+    });
   }
 
   return (
     <div className="add-member-modal">
-      <div>
-        <p>{channelName}</p>
-        <label>Add</label>
-        <input
-          type="text"
-          onChange={(e) => {
-            setQuery(e.target.value);
-          }}
-          value={query}
-        />
+      <div className="add-member-container">
+        <h2 className="modal-channel">{channelName}</h2>
+        <hr className="modal-hr" />
+        <div className="modal-search">
+          <label className="modal-label">Add a member</label>
+          <input
+            className="modal-search-input"
+            type="text"
+            placeholder="Search by email"
+            onChange={(e) => {
+              setQuery(e.target.value);
+            }}
+            value={query}
+          />
+        </div>
       </div>
 
-      <ul>
+      <ul className="modal-search-results">
         {userList &&
           query !== "" &&
           userList.map((user) => {
             if (!user.email.startsWith(query)) return null;
             return (
               <li
+                className="modal-search-result"
                 onClick={() => {
                   handleSelectedReceiver(user.id);
                   setQuery("");

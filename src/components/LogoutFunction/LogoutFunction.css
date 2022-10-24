@@ -6,4 +6,7 @@
 
 .logout-button {
     margin: 2rem;
+    padding: 0.95rem 1rem;
+    border-radius: 1rem;
+    border: none;
 }

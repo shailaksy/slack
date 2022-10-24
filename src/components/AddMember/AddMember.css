@@ -1,10 +1,58 @@
 .add-member-modal {
-  width: 100px;
-  height: 100px;
+  width: 300px;
+  height: 300px;
   position: fixed;
   top: 50vh;
   left: 50vw;
   transform: translate(-50%, -50%);
   z-index: 100000000000;
-  background-color: white;
+  background-color: rgb(62, 62, 62);
+  color: white;
+  border-radius: 2rem;
+}
+
+.add-member-container {
+  margin: 2rem;
+}
+
+.modal-channel {
+  text-align: center;
+}
+
+.modal-hr {
+  margin: 0.7rem 0;
+}
+
+.modal-search {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
+}
+
+.modal-search-input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  padding: 0.3rem 0;
+  outline: none;
+  color: white;
+  margin: 0.5rem 0;
+}
+
+.modal-search-results {
+  width: 300px;
+  position: fixed;
+  list-style-type: none;
+  top: 45%;
+  max-height: 18vh;
+  overflow-y: auto;
+}
+
+.modal-search-result {
+  padding: 0.75rem 0.3rem 0.75rem 2rem;
+  cursor: pointer;
+}
+
+.modal-search-result:hover {
+  background-color: rgb(30, 30, 30);
 }
