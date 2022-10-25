@@ -6,7 +6,7 @@ import Home from "./pages/Home/Home";
 import SignedUp from "./pages/SignedUp/SignedUp";
 import Login from "./pages/Login/Login";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Conversation from "./components/Conversation/Conversation";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
       <Route path="/signedup" element={<SignedUp />} />
       <Route path="/login" element={<Login />} />
       <Route path="/dashboard/*" element={<Dashboard />} />
+      <Route path='*' element={<NotFound />} />
     </Routes>
   );
 

@@ -1,0 +1,21 @@
+.error-page {
+  background-color: white;
+  color: black;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -75%);
+  text-align: center;
+}
+
+.error-page > h1 {
+  font-size: 800%;
+}
+
+.error-page > h4 {
+    font-size: 150%;
+}
+
+.error-page > * {
+  padding: 0.4rem;
+}
