@@ -1,9 +1,10 @@
 .error-message {
-  padding: 0 0 1rem;
+  padding: 1rem 0;
   text-align: center;
   font-weight: 700;
   text-transform: uppercase;
   color: red;
+  font-size: 70%;
 }
 
 .signup-form-inputs {
@@ -27,7 +28,7 @@
   margin: 0.6rem 0;
   width: 25vw;
   font-weight: 700;
-  background-color: #7C3085;
+  background-color: #7c3085;
   color: white;
   border-radius: 0.4rem;
   border: none;

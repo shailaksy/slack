@@ -78,7 +78,9 @@ function SignUpForm() {
             required
           />
         </div>
-        <p className="error-message">{error}</p>
+        <div className="error-message-container">
+          <p className="error-message">{error}</p>
+        </div>
         <button type="submit" onClick={handleSignUp} className="signup-button">
           Sign Up
         </button>

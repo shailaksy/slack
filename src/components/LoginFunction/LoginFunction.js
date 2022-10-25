@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.png";
 import "../LoginFunction/LoginFunction.css";
 
 const LoginFunction = ({ Login }) => {
@@ -64,12 +65,14 @@ const LoginFunction = ({ Login }) => {
 
   return (
     <div className="login">
+      <div className="logo-container">
+        <img src={logo} className="home-logo" />
+      </div>
       <div className="login-container">
-        <h1>Welcome back!</h1>
+        <h1>Sign in to your workspace</h1>
         <form onSubmit={handleLogin}>
           {error !== "" ? <p className="error-message">{error}</p> : ""}
           <div className="login-inputs">
-            <label>Email</label>
             <input
               className="login-input"
               type="email"
@@ -83,7 +86,6 @@ const LoginFunction = ({ Login }) => {
             />
           </div>
           <div className="login-inputs">
-            <label>Password</label>
             <input
               className="login-input"
               type="password"
@@ -100,6 +102,14 @@ const LoginFunction = ({ Login }) => {
             Login
           </button>
         </form>
+        <div className="login-signup-container">
+          <p>Not yet on slack?</p>
+          <p>
+            <Link to={"/"} className="login-signup-link">
+              Sign up here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

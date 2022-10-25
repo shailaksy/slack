@@ -25,9 +25,7 @@ function Home() {
           </p>
         </div>
         <div className="or-container">
-          <hr />
-          <p>OR</p>
-          <hr />
+          <span>OR</span>
         </div>
         <div className="signup-form-container">
           <SignUpForm />
