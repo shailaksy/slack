@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Chat from "../../components/Chat/Chat";
+import LoginFunction from "../../components/LoginFunction/LoginFunction";
 import Header from "../../components/LogoutFunction/LogoutFunction";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import "../Dashboard/Dashboard.css";
@@ -14,7 +15,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {signedInUser && (
+      {signedInUser ? (
         <div className="dashboard">
           <div>
             <Header />
@@ -30,7 +31,7 @@ const Dashboard = () => {
             </Routes>
           </div>
         </div>
-      )}
+      ) : (<LoginFunction />) }
     </>
   );
 };
