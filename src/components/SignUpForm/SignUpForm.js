@@ -3,31 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function SignUpForm() {
-  
   let navigate = useNavigate();
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState("Please fill out all fields");
-  
-  /*const [newUser, setNewUser] = useState({
-    email: "",
-    username: "",
-    password: ""
-  });
-
-  let users = [
-    {
-        email: "shai@mail.com",
-        username: "shai",
-        password: "user"
-    }
-  ]
-
-localStorage.setItem("signedUpUsers", JSON.stringify(users));
-
-const signedUpUsers = JSON.parse(localStorage.getItem("signedUpUsers"));
-*/
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -35,101 +15,76 @@ const signedUpUsers = JSON.parse(localStorage.getItem("signedUpUsers"));
     const data = {
       email: email,
       password: password,
-      password_confirmation: password
-    }
+      password_confirmation: password,
+    };
 
-    fetch('http://206.189.91.54/api/v1/auth/', {
-      method: 'POST',
+    fetch("http://206.189.91.54/api/v1/auth/", {
+      method: "POST",
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => {
         if (response.status === 200) {
-          navigate('/signedup');
+          navigate("/signedup");
         }
-        return response.json()
-
+        return response.json();
       })
       .then((result) => {
-        console.log(result)
-      })
-      
+        const errorMessages = result.errors.full_messages;
+        const lastErrorMessage = errorMessages[errorMessages.length - 1];
+        setError(lastErrorMessage);
+      });
+  };
 
-    /*if (user) {
-        setError("Username is already taken");
-        setNewUser({
-            email: "",
-            username: "",
-            password: ""
-        });
-    } else if (newUser.email === "" || newUser.username === "" || newUser.password === "") {
-        setError("Incomplete information");
-        setNewUser({
-            email: "",
-            username: "",
-            password: ""
-        });
-    } else {
-        localStorage.setItem("signedUpUsers", JSON.stringify([...signedUpUsers, newUser]));
-        navigate('/signedup');
-    }  */
-  }
-
-return(
-  <div className='signup-form'>
-    <form method="GET" onSubmit={handleSignUp}>
-      <div>
-      <p className="error-message">{error}</p>
-        <div className='signup-form-inputs'>
-          <label>Email</label>
-          <input 
+  return (
+    <div className="signup-form">
+      <form method="GET" onSubmit={handleSignUp}>
+        <div className="signup-form-inputs">
+          <input
             className="signup-form-input"
-            onChange={(e) => {setEmail(e.target.value)}}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             value={email}
             type="email"
-            placeholder="Email"
+            placeholder="Email address"
             autoComplete="off"
-            required />
+            spellCheck="off"
+            required
+          />
         </div>
-        <div className='signup-form-inputs'>
-          <label>Password</label>
-          <input 
+        <div className="signup-form-inputs">
+          <input
             className="signup-form-input"
-            onChange={(e) => {setPassword(e.target.value)}}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             type="password"
             value={password}
             placeholder="Password"
             autoComplete="off"
-            required />
-          </div>
-          <div className='signup-form-inputs'>
-          <label>Confirm Password</label>
-          <input 
+            required
+          />
+        </div>
+        <div className="signup-form-inputs">
+          <input
             className="signup-form-input"
             type="password"
-            placeholder="Re-type Password" 
+            placeholder="Re-type Password"
             autoComplete="off"
-            required />
-          </div>
-      </div>
-      <div className='signup-checkbox'>
-        <input
-          type="checkbox"
-          required />
-        <label>I agree to the terms and conditions.</label>
-      </div>
-        <button
-            type="submit"
-            onClick={handleSignUp}
-            className='signup-button'
-        >
-        Sign Up
+            spellCheck="off"
+            required
+          />
+        </div>
+        <p className="error-message">{error}</p>
+        <button type="submit" onClick={handleSignUp} className="signup-button">
+          Sign Up
         </button>
-    </form>
-  </div>
-)
+      </form>
+    </div>
+  );
 }
-    
-export default SignUpForm
+
+export default SignUpForm;

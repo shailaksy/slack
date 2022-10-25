@@ -1,48 +1,93 @@
-.welcome {
-    background-color: rgb(62, 62, 62);
-    width: 100%;
-    height: 100vh;
+.home {
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
 }
 
-.welcome-container {
-    background-color: white;
-    color:rgb(62, 62, 62);
-    width: 35%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 1rem 0 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2rem;
-    box-shadow: 15px 15px 15px rgb(50, 50, 50);
+.logo-container {
+  position: absolute;
+  top: 9.5%;
+  width: 100vw;
 }
 
-.welcome-container > h1,
-.welcome-container > p {
-    padding-top: 2.5rem;
+.home-logo {
+  height: 3rem;
+  width: auto;  
+  display: block;
+  margin: auto;
 }
 
-.welcome-container > h1 {
-    padding-bottom: 2.5rem;
+.home-container {
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 1rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-.welcome-container > p {
-    padding-bottom: 1rem;
+.home-container > h1 {
+  font-size: 300%;
+  padding: 0.6rem;
+  font-weight: 700;
 }
 
-.login-link {
-    padding: 0.8rem 2.5rem;
-    background-color: rgb(26, 123, 192);
-    color: white;
-    border-radius: 0.5rem;
-    text-decoration: none;
+.home-container > p {
+  padding: 0.6rem 0 1.6rem;
+  font-size: 115%;
 }
 
+.continue-button {
+  text-align: center;
+  width: 25vw;
+  font-weight: 700;
+  padding: 0.6rem 0.4rem;
+  margin: 0.6rem 0;
+  border: 1px solid black;
+  border-radius: 0.4rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.continue-icon {
+  height: 1.1rem;
+  width: auto;
+}
+
+.or-container {
+  margin: 0.6rem 0;
+  display: flex;
+}
+
+.signup-form-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.login-link-container {
+  text-align: center;
+  top: 110%;
+  position: fixed;
+}
+
+.login-link-container > * {
+  padding: 0.6rem 0;
+}
+
+.login-link,
 .login-link:visited {
-    color: white;
-    text-decoration: none;
+  text-align: center;
+  text-decoration: none;
+  color: #1264a3;
+}
+
+.login-link:hover {
+  text-decoration: underline;
 }
